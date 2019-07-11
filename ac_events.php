@@ -20,6 +20,7 @@ if(!empty($_GET['delete']))
 {
 	$event_id = $_GET['delete'];
 
+
 	$stmt = $mysqli->prepare("SELECT band_id FROM events where id = ?");
 	$stmt->bind_param('i', $event_id);
 	$stmt->execute();
@@ -27,7 +28,15 @@ if(!empty($_GET['delete']))
 	$row = $result->fetch_assoc();
 
 	if ($row['band_id'] == $_SESSION['id'])
-	{
+	{	
+		$stmt = $mysqli->prepare("DELETE FROM messages where event_id = ?");
+		$stmt->bind_param('i', $event_id);
+		$stmt->execute();
+
+		$stmt = $mysqli->prepare("DELETE FROM members where event_id = ?");
+		$stmt->bind_param('i', $event_id);
+		$stmt->execute();
+
 		$stmt = $mysqli->prepare("DELETE from events where id = ?");
 		$stmt->bind_param('i', $event_id);
 		$stmt->execute();

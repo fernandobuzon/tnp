@@ -53,7 +53,8 @@ if ($conn->connect_error)
 	die("Connection failed: " . $conn->connect_error);
 } 
 
-$sql = "SELECT * FROM events where date >= now() order by date desc";
+$now = date('Y-m-d',strtotime("-1 days"));
+$sql = "SELECT * FROM events where date >= $now order by date desc";
 $result = $conn->query($sql);
 
 
@@ -208,6 +209,10 @@ if ($result->num_rows > 0)
             echo '    </div> ';
             echo '</div>';
 	}
+}
+else
+{
+	echo '<h2><span class="label label-default" >Nenhum evento cadastrado.</span></h2>';
 }
 
 $conn->close();
