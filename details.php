@@ -120,7 +120,7 @@ else
 		    </div>  
 
 <?php
-$stmt = $mysqli->prepare("SELECT * FROM messages where event_id = ? order by id desc");
+$stmt = $mysqli->prepare("SELECT messages.*,bands.name FROM messages inner join bands on messages.band_id = bands.id where messages.event_id = ? order by messages.id desc;");
 $stmt->bind_param('i', $event_id);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -131,7 +131,7 @@ if ($result->num_rows > 0)
 	{
 		echo '<div class="panel-body" >';
 		echo '	<div class="form-group">';
-		echo '	    <label class="control-label col-md-4">' . $band_name . '<br><span style="font-weight: normal;">' . $row['date'] . '</span>';
+		echo '	    <label class="control-label col-md-4">' . $row['name'] . '<br><span style="font-weight: normal;">' . $row['date'] . '</span>';
 		if($row['band_id'] == $_SESSION['id'])
 		{
 			echo '<br><a href="ac_messages.php?action=delete&event_id=' . $event_id . '&message_id=' . $row['id'] . '">Excluir</a>';

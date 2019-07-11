@@ -54,7 +54,7 @@ if ($conn->connect_error)
 } 
 
 $now = date('Y-m-d',strtotime("-1 days"));
-$sql = "SELECT * FROM events where date >= $now order by date desc";
+$sql = "SELECT * FROM events where date >= $now order by date";
 $result = $conn->query($sql);
 
 
