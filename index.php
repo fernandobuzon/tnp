@@ -137,6 +137,7 @@ if ($result->num_rows > 0)
 			if ($row['band_id'] == $_SESSION['id'])
 			{
 		    		echo '                    <strong>AÇÕES</strong> <a href="ac_actions.php?event_id=' . $event_id . '&band_id=' . $f['id'] . '&action=confirmed">APROVAR</a>';
+		    		echo '                    <br><a href="ac_actions.php?event_id=' . $event_id . '&band_id=' . $f['id']  . '&action=rejected">REJEITAR</a>';
 			}
 			else
 			{
