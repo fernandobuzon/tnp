@@ -54,7 +54,7 @@ if ($conn->connect_error)
 } 
 
 $now = date('Y-m-d',strtotime("-1 days"));
-$sql = "SELECT * FROM events where date >= $now order by date";
+$sql = "SELECT *,DATE_FORMAT(date,'%d/%m/%Y') AS date_formated FROM events where date >= $now order by date";
 $result = $conn->query($sql);
 
 
@@ -67,11 +67,11 @@ if ($result->num_rows > 0)
             echo '        <div class="wrapper">';
             echo '            <div class="header">' . $row['name'] . '<br>' . $row['city'] . '</div>';
 	    echo '            <div class="banner-img">';
-	    echo '                <a href="details.php?event_id=' . $row['id'] . '"><img src="' . $img_events_dir . '/' . $row['band_id'] . '_' . $row['date'] . '.jpg"></a>';
+	    echo '                <a href="details.php?owner_id=' . $row['band_id'] . '&event_id=' . $row['id'] . '"><img src="' . $img_events_dir . '/' . $row['band_id'] . '_' . $row['date'] . '.jpg"></a>';
             echo '            </div>';
             echo '            <div class="dates">';
             echo '                <div class="start">';
-            echo '                    <strong>Data</strong> ' . $row['date'];
+            echo '                    <strong>Data</strong> ' . $row['date_formated'];
             echo '                    <span></span>';
             echo '                </div>';
             echo '                <div class="ends">';
@@ -182,7 +182,7 @@ if ($result->num_rows > 0)
 	    }
 
 	    echo '            <div class="footer">';
-	    echo '                <a href="details.php?event_id=' . $event_id . '" class="Cbtn Cbtn-primary">Detalhes</a>';
+	    echo '                <a href="details.php?owner_id=' . $row['band_id'] . '&event_id=' . $event_id . '" class="Cbtn Cbtn-primary">Detalhes</a>';
 
 	    $sqlc = "SELECT id FROM members where event_id = $event_id and band_id = " . $_SESSION['id'];
 	    $resultc = $conn->query($sqlc);

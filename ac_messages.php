@@ -14,6 +14,7 @@ if (!empty($_GET['action']))
 {
 	$message_id = $_GET['message_id'];
 	$event_id = $_GET['event_id'];
+	$owner_id = $_GET['owner_id'];
 
 	$mysqli = new mysqli($db_host, $db_name, $db_pass, $db_name);
 	if ($mysqli->connect_error)
@@ -38,6 +39,7 @@ else
 {
 	$event_id = $_POST['event_id'];
 	$band_id = $_SESSION['id'];
+	$owner_id = $_POST['owner_id'];
 	$message = $_POST['message'];
 	$date = date('Y-m-d');
 
@@ -55,6 +57,6 @@ else
 $stmt->close();
 $mysqli->close();
 
-header("location:details.php?event_id=$event_id");
+header("location:details.php?owner_id=$owner_id&event_id=$event_id");
 
 ?>
