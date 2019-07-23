@@ -54,7 +54,7 @@ if ($conn->connect_error)
 } 
 
 $now = date('Y-m-d',strtotime("-1 days"));
-$sql = "SELECT *,DATE_FORMAT(date,'%d/%m/%Y') AS date_formated FROM events where date >= $now order by date";
+$sql = "SELECT *,DATE_FORMAT(date,'%d/%m/%Y') AS date_formated FROM events where date >= '$now' order by date";
 $result = $conn->query($sql);
 
 
