@@ -67,7 +67,7 @@ if ($result->num_rows > 0)
             echo '        <div class="wrapper">';
             echo '            <div class="header">' . $row['name'] . '<br>' . $row['city'] . '</div>';
 	    echo '            <div class="banner-img">';
-	    echo '                <a href="details.php?owner_id=' . $row['band_id'] . '&event_id=' . $row['id'] . '"><img src="' . $img_events_dir . '/' . $row['band_id'] . '_' . $row['date'] . '.jpg"></a>';
+	    echo '                <a href="details.php?owner_id=' . $row['band_id'] . '&event_id=' . $row['id'] . '"><img src="' . $img_events_dir . '/' . $row['id'] . '.jpg"></a>';
             echo '            </div>';
             echo '            <div class="dates">';
             echo '                <div class="start">';

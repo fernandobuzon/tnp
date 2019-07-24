@@ -20,7 +20,6 @@ if(!empty($_GET['delete']))
 {
 	$event_id = $_GET['delete'];
 
-
 	$stmt = $mysqli->prepare("SELECT band_id FROM events where id = ?");
 	$stmt->bind_param('i', $event_id);
 	$stmt->execute();
@@ -40,6 +39,9 @@ if(!empty($_GET['delete']))
 		$stmt = $mysqli->prepare("DELETE from events where id = ?");
 		$stmt->bind_param('i', $event_id);
 		$stmt->execute();
+
+		$img = $img_events_dir . '/' . $event_id . '.jpg';
+		unlink($img);
 	}
 }
 else
@@ -76,12 +78,14 @@ else
 		$stmt = $mysqli->prepare("INSERT INTO events (band_id,name,date,start,city,address,state,ticket,obs) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 		$stmt->bind_param('issssssds', $band_id,$name,$date,$start,$city,$address,$state,$ticket,$obs);
 		$stmt->execute();
+		$event_id = $mysqli->insert_id;
 	}
 
 	if(!empty($_FILES['flyer']))
 	{
+
 		$tmp = $_FILES['flyer']['tmp_name'];
-		$dst = $img_events_dir . '/' . $_SESSION['id'] . '_' . $_POST['date'] . '.jpg';
+		$dst = $img_events_dir . '/' . $event_id . '.jpg';
 		move_uploaded_file($tmp,$dst);
 	}
 }
@@ -92,5 +96,4 @@ $mysqli->close();
 header('location:index.php');
 
 ?>
-
 
